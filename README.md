@@ -1,4 +1,3 @@
-# WebCrawler-in-c
-WebCrawler
+# WebCrawler in C
 
 WebCrawler in c
