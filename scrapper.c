@@ -51,14 +51,51 @@ bool ifDirectoryExists(char *path)
 //     }
 // }
 
-bool crawlWebsite(char *url)
+void moveToDesiredDir(char *path)
+{
+    printf("Hello");
+    FILE *oldFilePtr, *newFilePtr;
+    char newDIR[50],c;
+    strcpy(newDIR, path);
+    strcat(newDIR,"/");
+    strcat(newDIR,"index.html");
+
+    // open downloaded file in read mode
+    oldFilePtr=fopen("file.txt","r");
+    if(oldFilePtr==NULL)
+    {
+        printf("Can't open file");
+        exit(EXIT_FAILURE);
+    }
+
+    //open new desired file for wrting content of crawled webpage
+    newFilePtr=fopen(newDIR,"w");
+    if(newFilePtr==NULL)
+    {
+        printf("Can't open file");
+        exit(EXIT_FAILURE);
+    }
+
+    c=fgetc(oldFilePtr);
+    while(c!=EOF)
+    {
+        fputc(c, newFilePtr);
+        c=fgetc(oldFilePtr);
+    }
+
+    fclose(oldFilePtr);
+    fclose(newFilePtr);
+
+    printf("File copied successfully");
+}
+
+
+void crawlWebsite(char *url, char *path)
 {
     char sysCommand[]="wget -O file.txt ";
     strcat(sysCommand,url);
-    if(system(sysCommand)){
-        return true;
-    }
-    return false;
+    system(sysCommand);
+    moveToDesiredDir(path);
 }
 
 int main(int argc, char *argv[])
@@ -82,8 +119,8 @@ int main(int argc, char *argv[])
     //     exit(EXIT_FAILURE);
     // }
 
-    if(crawlWebsite(argv[1]))
-    {
-        printf("File downloaded successfully");
-    }
+    crawlWebsite(argv[1],argv[2]);
+
+    moveToDesiredDir(argv[2]);
+
 }
