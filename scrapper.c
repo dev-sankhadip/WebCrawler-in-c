@@ -12,7 +12,6 @@ bool ifDirectoryExists(char *path)
         fprintf(stderr, "-----------------\n");
         fprintf(stderr, "Invalid directory\n");
         fprintf(stderr, "-----------------\n");
-        // exit(1);
         return false;
     }
 
@@ -22,7 +21,6 @@ bool ifDirectoryExists(char *path)
         fprintf(stderr, "-----------------------------------------------------\n");
         fprintf(stderr, "Invalid directory entry. Your input isn't a directory\n");
         fprintf(stderr, "-----------------------------------------------------\n");
-        // exit(1);
         return false;
     }
 
@@ -31,25 +29,11 @@ bool ifDirectoryExists(char *path)
         fprintf(stderr, "------------------------------------------\n");
         fprintf(stderr, "Invalid directory entry. It isn't writable\n");
         fprintf(stderr, "------------------------------------------\n");
-        // exit(1);
         return false;
     }
     return true;
 }
 
-// bool ifValidUrl(char *url)
-// {
-//     char command[]="wget --spider ";
-//     strcat(command,url);
-//     if(system(command))
-//     {
-//         printf("URL validated");
-//     }
-//     else
-//     {
-//         printf("URL invalid");
-//     }
-// }
 
 void moveToDesiredDir(char *path)
 {
@@ -114,13 +98,6 @@ int main(int argc, char *argv[])
     }
 
     printf("Valid directory");
-    // if(!ifValidUrl(argv[1]))
-    // {
-    //     exit(EXIT_FAILURE);
-    // }
 
     crawlWebsite(argv[1],argv[2]);
-
-    // moveToDesiredDir(argv[2]);
-
 }
